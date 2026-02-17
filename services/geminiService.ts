@@ -1,11 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { Book } from "../types";
 
-const API_KEY = process.env.API_KEY || '';
+// Support both standard Node process.env (local/node) and Vite's import.meta.env (deployed/browser)
+// Note: In Vite, variables must usually start with VITE_ to be exposed to the client
+const API_KEY = process.env.API_KEY || (import.meta as any).env?.VITE_API_KEY || '';
 
 export const getAIBookInsights = async (books: Book[], query: string): Promise<string> => {
   if (!API_KEY) {
-    return "Please configure your API Key to use the AI Librarian features.";
+    return "Configuration Missing: Please add VITE_API_KEY to your environment variables.";
   }
 
   try {
@@ -36,6 +38,6 @@ export const getAIBookInsights = async (books: Book[], query: string): Promise<s
     return response.text || "I couldn't generate a response at this time.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Sorry, I encountered an error while communicating with the library AI.";
+    return "Sorry, I encountered an error while communicating with the library AI. Check your API Key configuration.";
   }
 };

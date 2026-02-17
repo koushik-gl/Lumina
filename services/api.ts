@@ -3,7 +3,7 @@ import { INITIAL_BOOKS } from '../constants';
 
 const STORAGE_KEY = 'books';
 
-// Recommendation Database ported from backend
+// Recommendation Database (Moved to client-side)
 const RECOMMENDATIONS_DB: Record<string, Array<{title: string, author: string}>> = {
     'Fiction': [
         {'title': 'The Kite Runner', 'author': 'Khaled Hosseini'},
@@ -84,7 +84,7 @@ const saveLocalBooks = (books: Book[]) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
 };
 
-// Simulate network delay
+// Simulate network delay for realistic feel
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const checkHealth = async (): Promise<boolean> => {
