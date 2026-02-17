@@ -101,7 +101,15 @@ def init_db():
         finally:
             conn.close()
 
+# Initialize DB immediately to ensure tables exist
+init_db()
+
 # --- API Routes ---
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    """Simple health check endpoint."""
+    return jsonify({"status": "ok"}), 200
 
 @app.route('/books', methods=['GET'])
 def get_books():
@@ -255,7 +263,4 @@ def recommend_book():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    # Initialize the DB before starting the app
-    init_db()
-    # Run the Flask app
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -131,16 +131,24 @@ const BookList: React.FC<BookListProps> = ({ books, onAddBook, onEditBook, onDel
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button 
+                          type="button"
                           onClick={() => onEditBook(book)}
                           className="p-2 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-indigo-400 transition-colors"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button 
-                          onClick={() => onDeleteBook(book.id)}
-                          className="p-2 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-rose-400 transition-colors"
+                          type="button"
+                          data-id={book.id}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log('Delete clicked for id:', book.id);
+                            onDeleteBook(book.id);
+                          }}
+                          className="delete-btn p-2 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-rose-400 transition-colors"
+                          aria-label="Delete book"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-4 h-4 pointer-events-none" />
                         </button>
                       </div>
                     </td>

@@ -20,7 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
         <div className="p-2 bg-indigo-600 rounded-lg">
           <BookOpen className="w-6 h-6 text-white" />
         </div>
-        <h1 className="text-xl font-bold text-white tracking-tight">Lumina</h1>
+        <h1 className="text-xl font-bold text-white tracking-tight">Smart Shelf</h1>
       </div>
 
       <nav className="flex-1 p-4 space-y-2">
